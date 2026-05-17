@@ -53,7 +53,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 72px;
+      height: 90px;
       background: linear-gradient(to bottom, rgba(26,16,8,0.97), rgba(26,16,8,0.0));
       transition: background 0.4s;
     }
@@ -68,9 +68,9 @@
       gap: 10px;
     }
     .nav-logo img {
-      height: 46px;
+      height: 72px;
       width: auto;
-      filter: drop-shadow(0 0 8px rgba(212,160,23,0.4));
+      filter: drop-shadow(0 0 10px rgba(212,160,23,0.5));
     }
     .nav-links {
       display: flex;
@@ -130,7 +130,7 @@
     .mobile-menu {
       display: none;
       position: fixed;
-      top: 72px; left: 0; right: 0;
+      top: 90px; left: 0; right: 0;
       background: rgba(26,16,8,0.98);
       border-top: 1px solid rgba(212,160,23,0.2);
       padding: 24px 5%;
@@ -719,7 +719,7 @@
   <!-- NAVBAR -->
   <nav id="navbar">
     <div class="nav-logo">
-      <img src="https://restauranteelchavin.cl/LogoChavin.png" alt="El Chavín" />
+      <img src="./images/LogoChavin.png" alt="El Chavín" />
     </div>
     <ul class="nav-links">
       <li><a href="#platos">Platos</a></li>
@@ -755,7 +755,7 @@
         Bienvenido a El Chavín.
       </p>
       <div class="hero-btns">
-        <a href="menu.html" class="btn-primary">🍽️ Ver Menú Completo</a>
+        <a href="#menu" class="btn-primary">🍽️ Ver Menú Completo</a>
         <a href="https://wa.me/56961956012" target="_blank" class="btn-secondary">💬 Reservar Mesa</a>
       </div>
     </div>
@@ -794,28 +794,28 @@
     </div>
     <div class="platos-grid reveal">
       <div class="plato-card" onclick="openLightbox(this.querySelector('img').src)">
-        <img src="https://restauranteelchavin.cl/lomo%20saltado.jpg" alt="Lomo Saltado" loading="lazy" />
+        <img src="./images/Lomo.jpg" alt="Lomo Saltado" loading="lazy" />
         <div class="plato-overlay">
           <div class="plato-name">Lomo Saltado</div>
           <div class="plato-desc">Trozos de lomo salteados al wok con cebolla, tomate y papas fritas. Clásico irresistible.</div>
         </div>
       </div>
       <div class="plato-card" onclick="openLightbox(this.querySelector('img').src)">
-        <img src="https://restauranteelchavin.cl/ceviche.jpg" alt="Ceviche" loading="lazy" />
+        <img src="./images/Ceviche.jpg" alt="Ceviche" loading="lazy" />
         <div class="plato-overlay">
           <div class="plato-name">Ceviche</div>
           <div class="plato-desc">Pescado fresco marinado en limón y ají, acompañado de choclo y camote. Fresco y potente.</div>
         </div>
       </div>
       <div class="plato-card" onclick="openLightbox(this.querySelector('img').src)">
-        <img src="https://restauranteelchavin.cl/tacu%20tacu%20de%20mariscos.jpeg" alt="Tacu Tacu de Mariscos" loading="lazy" />
+        <img src="./images/tacu.jpeg" alt="Tacu Tacu de Mariscos" loading="lazy" />
         <div class="plato-overlay">
           <div class="plato-name">Tacu Tacu de Mariscos</div>
           <div class="plato-desc">Mezcla cremosa de frijoles y arroz con mariscos frescos. Una delicia de la costa peruana.</div>
         </div>
       </div>
       <div class="plato-card" onclick="openLightbox(this.querySelector('img').src)">
-        <img src="https://restauranteelchavin.cl/aji%20de%20gallina.jpeg" alt="Ají de Gallina" loading="lazy" />
+        <img src="./images/aji.jpeg" alt="Aji de Gallina" loading="lazy" />
         <div class="plato-overlay">
           <div class="plato-name">Ají de Gallina</div>
           <div class="plato-desc">Pollo desmenuzado en cremosa salsa de ají amarillo con nueces. Reconfortante y único.</div>
@@ -1098,7 +1098,7 @@
 
   <!-- FOOTER -->
   <footer>
-    <img src="https://restauranteelchavin.cl/LogoChavin.png" alt="El Chavín" />
+    <img src="./images/LogoChavin.png" alt="El Chavín" />
     <p>© 2025 El Chavín · Restaurante Peruano · La Florida, Santiago · Todos los derechos reservados</p>
     <p style="color:rgba(245,237,214,0.2); font-size:0.7rem;">Diseño web por ARM</p>
   </footer>
