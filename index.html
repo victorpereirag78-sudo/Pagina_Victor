@@ -1,133 +1,1168 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>El Chavín - Restaurante de Comida Peruana en La Florida, Santiago</title>
-  <meta name="description" content="Descubre el auténtico sabor de la gastronomía peruana en El Chavín. Disfruta de nuestros platos destacados, pollos a las brasas y más. ¡Visítanos en La Florida!">
-  <link rel="icon" href="LogoChavin3.png" type="image/png"> <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/css/lightgallery-bundle.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="El Chavín — Auténtica gastronomía peruana en La Florida, Santiago. Reservas y delivery al +56 9 6195 6012." />
+  <title>El Chavín · Restaurante Peruano · La Florida</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== VARIABLES ===== */
+    :root {
+      --rojo:     #C0392B;
+      --oro:      #D4A017;
+      --crema:    #F5EDD6;
+      --tierra:   #8B4513;
+      --carbon:   #1A1008;
+      --humo:     #2C1A0E;
+      --blanco:   #FFFDF7;
+      --texto:    #3A1F0A;
+      --gris:     #7A6352;
+    }
+
+    /* ===== RESET ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--carbon);
+      color: var(--crema);
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ===== TEXTURA DE FONDO ===== */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ===== NAVBAR ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      background: linear-gradient(to bottom, rgba(26,16,8,0.97), rgba(26,16,8,0.0));
+      transition: background 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(26,16,8,0.98);
+      box-shadow: 0 2px 30px rgba(0,0,0,0.5);
+      border-bottom: 1px solid rgba(212,160,23,0.2);
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-logo img {
+      height: 46px;
+      width: auto;
+      filter: drop-shadow(0 0 8px rgba(212,160,23,0.4));
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--crema);
+      opacity: 0.8;
+      transition: opacity 0.2s, color 0.2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 1px;
+      background: var(--oro);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover { opacity: 1; color: var(--oro); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      background: var(--rojo);
+      color: var(--crema) !important;
+      opacity: 1 !important;
+      padding: 8px 20px;
+      border-radius: 2px;
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: #a93226 !important; }
+    .nav-cta::after { display: none !important; }
+
+    /* HAMBURGER */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--crema);
+      transition: all 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* MOBILE NAV */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 72px; left: 0; right: 0;
+      background: rgba(26,16,8,0.98);
+      border-top: 1px solid rgba(212,160,23,0.2);
+      padding: 24px 5%;
+      z-index: 999;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: 1.1rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--crema);
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .mobile-menu a:last-child { border: none; }
+
+    /* ===== HERO ===== */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to top, rgba(26,16,8,1) 0%, rgba(26,16,8,0.4) 50%, rgba(26,16,8,0.2) 100%),
+        url('https://restauranteelchavin.cl/ceviche.jpg') center/cover no-repeat;
+      animation: heroZoom 18s ease-in-out infinite alternate;
+    }
+    @keyframes heroZoom {
+      from { transform: scale(1); }
+      to   { transform: scale(1.06); }
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 8% 100px;
+      max-width: 720px;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(212,160,23,0.15);
+      border: 1px solid rgba(212,160,23,0.4);
+      color: var(--oro);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 2px;
+      margin-bottom: 24px;
+      animation: fadeUp 0.8s ease both;
+    }
+    .hero-badge::before { content: '★'; font-size: 0.7rem; }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 900;
+      line-height: 1.0;
+      margin-bottom: 24px;
+      animation: fadeUp 0.9s 0.1s ease both;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--oro);
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      font-weight: 300;
+      color: rgba(245,237,214,0.75);
+      line-height: 1.7;
+      max-width: 500px;
+      margin-bottom: 40px;
+      animation: fadeUp 1s 0.2s ease both;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      animation: fadeUp 1s 0.3s ease both;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--rojo);
+      color: var(--crema);
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      padding: 14px 30px;
+      border-radius: 2px;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+    .btn-primary:hover {
+      background: #a93226;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(192,57,43,0.4);
+    }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(245,237,214,0.4);
+      color: var(--crema);
+      font-weight: 500;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      padding: 14px 28px;
+      border-radius: 2px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-secondary:hover {
+      border-color: var(--oro);
+      background: rgba(212,160,23,0.1);
+      color: var(--oro);
+    }
+
+    /* Hero scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 36px;
+      right: 8%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0.4;
+      animation: fadeUp 1s 0.5s ease both;
+    }
+    .scroll-hint span {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      writing-mode: vertical-rl;
+    }
+    .scroll-line {
+      width: 1px; height: 48px;
+      background: linear-gradient(to bottom, var(--crema), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(0.7); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== SECCIÓN GENÉRICA ===== */
+    section { position: relative; z-index: 1; }
+    .section-pad { padding: 100px 8%; }
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--oro);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.15;
+    }
+    .section-title em { font-style: italic; color: var(--oro); }
+    .divider {
+      width: 48px; height: 2px;
+      background: var(--rojo);
+      margin: 20px 0 40px;
+    }
+
+    /* ===== STATS BAR ===== */
+    .stats-bar {
+      background: var(--rojo);
+      padding: 28px 8%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .stat-item {
+      text-align: center;
+    }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.8;
+      margin-top: 4px;
+    }
+
+    /* ===== PLATOS ===== */
+    #platos {
+      background: var(--humo);
+    }
+    .platos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2px;
+      margin-top: 0;
+    }
+    .plato-card {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      cursor: pointer;
+    }
+    .plato-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .plato-card:hover img { transform: scale(1.08); }
+    .plato-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(26,16,8,0.95) 0%, rgba(26,16,8,0.2) 55%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+      transition: background 0.4s;
+    }
+    .plato-card:hover .plato-overlay {
+      background: linear-gradient(to top, rgba(192,57,43,0.9) 0%, rgba(26,16,8,0.3) 55%, transparent 100%);
+    }
+    .plato-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .plato-desc {
+      font-size: 0.8rem;
+      color: rgba(245,237,214,0.7);
+      line-height: 1.5;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+    .plato-card:hover .plato-desc { max-height: 80px; }
+
+    /* ===== MENÚ ===== */
+    #menu {
+      background: var(--carbon);
+    }
+    .menu-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .tab-btn {
+      background: transparent;
+      border: 1px solid rgba(245,237,214,0.2);
+      color: rgba(245,237,214,0.6);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tab-btn:hover { border-color: var(--oro); color: var(--oro); }
+    .tab-btn.active {
+      background: var(--rojo);
+      border-color: var(--rojo);
+      color: var(--crema);
+    }
+    .menu-panel { display: none; }
+    .menu-panel.active { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2px; }
+    .menu-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 24px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .menu-item:hover {
+      background: rgba(212,160,23,0.06);
+      border-color: rgba(212,160,23,0.2);
+    }
+    .menu-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .menu-item-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    .menu-item-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--oro);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .menu-item-desc {
+      font-size: 0.82rem;
+      color: rgba(245,237,214,0.55);
+      line-height: 1.6;
+    }
+
+    /* ===== HISTORIA ===== */
+    #historia {
+      background: var(--humo);
+      overflow: hidden;
+    }
+    .historia-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .historia-img-wrap {
+      position: relative;
+    }
+    .historia-img-wrap img {
+      width: 100%; height: 500px;
+      object-fit: cover;
+      border-radius: 1px;
+    }
+    .historia-img-badge {
+      position: absolute;
+      bottom: -24px;
+      right: -24px;
+      background: var(--rojo);
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 12px;
+    }
+    .historia-img-badge strong {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+    .historia-img-badge span {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.85;
+    }
+    .historia-text p {
+      font-size: 0.95rem;
+      color: rgba(245,237,214,0.7);
+      line-height: 1.9;
+      margin-bottom: 20px;
+    }
+    .historia-quote {
+      border-left: 3px solid var(--oro);
+      padding-left: 24px;
+      margin: 32px 0;
+    }
+    .historia-quote p {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-style: italic;
+      color: var(--crema) !important;
+    }
+
+    /* ===== CONTACTO ===== */
+    #contacto {
+      background: var(--carbon);
+    }
+    .contacto-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+    .info-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .info-card {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 20px 24px;
+      border-radius: 2px;
+      transition: border-color 0.2s;
+    }
+    .info-card:hover { border-color: rgba(212,160,23,0.3); }
+    .info-icon {
+      font-size: 1.4rem;
+      line-height: 1;
+      flex-shrink: 0;
+      width: 36px;
+      text-align: center;
+    }
+    .info-card h4 {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--oro);
+      margin-bottom: 6px;
+    }
+    .info-card p, .info-card a {
+      font-size: 0.92rem;
+      color: rgba(245,237,214,0.75);
+      line-height: 1.6;
+    }
+    .info-card a:hover { color: var(--crema); }
+    .mapa-wrap {
+      border-radius: 2px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .mapa-wrap iframe {
+      width: 100%; height: 380px;
+      filter: grayscale(40%) contrast(1.1);
+    }
+
+    /* Redes sociales */
+    .redes {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+    .red-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(245,237,214,0.15);
+      color: rgba(245,237,214,0.65);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      padding: 9px 18px;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .red-btn:hover {
+      border-color: var(--oro);
+      color: var(--oro);
+      background: rgba(212,160,23,0.07);
+    }
+
+    /* ===== WHATSAPP FLOTANTE ===== */
+    .wa-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 9999;
+      width: 58px; height: 58px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: waPop 0.5s 1.5s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    .wa-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 28px rgba(37,211,102,0.6);
+    }
+    .wa-float svg { width: 30px; height: 30px; fill: white; }
+    @keyframes waPop {
+      from { opacity: 0; transform: scale(0); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: rgba(0,0,0,0.5);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 32px 8%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    footer p {
+      font-size: 0.78rem;
+      color: rgba(245,237,214,0.35);
+      letter-spacing: 0.05em;
+    }
+    footer img { height: 36px; filter: brightness(0.6); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .section-pad { padding: 70px 6%; }
+      .historia-inner,
+      .contacto-inner { grid-template-columns: 1fr; gap: 40px; }
+      .historia-img-wrap img { height: 300px; }
+      .historia-img-badge { bottom: -16px; right: 16px; }
+    }
+
+    @media (max-width: 680px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero-content { padding: 0 6% 80px; }
+      .hero-btns { flex-direction: column; }
+      .btn-primary, .btn-secondary { text-align: center; justify-content: center; }
+      .stats-bar { gap: 28px; }
+      .platos-grid { grid-template-columns: 1fr 1fr; }
+      .menu-panel.active { grid-template-columns: 1fr; }
+      .mapa-wrap iframe { height: 260px; }
+    }
+
+    @media (max-width: 420px) {
+      .platos-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ===== LIGHTBOX ===== */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 9998;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 5%;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 2px;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 20px; right: 28px;
+      font-size: 2rem;
+      color: var(--crema);
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .lightbox-close:hover { opacity: 1; }
+
+    /* ===== REVEAL ON SCROLL ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+  </style>
 </head>
 <body>
-  
-  <div class="banderas">
-    <img src="LogoChavin.png" alt="Logo El Chavín" class="logo-central">
+
+  <!-- NAVBAR -->
+  <nav id="navbar">
+    <div class="nav-logo">
+      <img src="https://restauranteelchavin.cl/LogoChavin.png" alt="El Chavín" />
+    </div>
+    <ul class="nav-links">
+      <li><a href="#platos">Platos</a></li>
+      <li><a href="#menu">Menú</a></li>
+      <li><a href="#historia">Historia</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+      <li><a href="https://wa.me/56961956012" target="_blank" class="nav-cta">📞 Reservar</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#platos" onclick="closeMenu()">Platos</a>
+    <a href="#menu" onclick="closeMenu()">Menú</a>
+    <a href="#historia" onclick="closeMenu()">Historia</a>
+    <a href="#contacto" onclick="closeMenu()">Contacto</a>
+    <a href="https://wa.me/56961956012" target="_blank" style="color:var(--oro);">📞 Reservar por WhatsApp</a>
   </div>
 
-  <header>
-    <nav>
-      <ul>
-        <li><a href="#platos">Platos</a></li>
-        <li><a href="Menu Chavin.pdf" target="_blank" rel="noopener noreferrer" class="pdf-link">Menú</a></li>
-        <li><a href="#historia">Historia</a></li>
-        <li><a href="#contacto">Contacto</a></li>
-      </ul>
-      <div class="social-bar">
-        <a href="https://www.facebook.com/restaurantelchavin/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-        <a href="https://www.instagram.com/el_chavin" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.tiktok.com/@el.chavin.restaur" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-badge">Gastronomía Peruana Auténtica</div>
+      <h1 class="hero-title">
+        El Sabor<br/>que <em>Conquista</em>
+      </h1>
+      <p class="hero-sub">
+        Desde La Florida hasta el Perú profundo — tradición, brasas y sazón en cada plato. 
+        Bienvenido a El Chavín.
+      </p>
+      <div class="hero-btns">
+        <a href="menu.html" class="btn-primary">🍽️ Ver Menú Completo</a>
+        <a href="https://wa.me/56961956012" target="_blank" class="btn-secondary">💬 Reservar Mesa</a>
       </div>
-    </nav>
-  </header>
-
-  <section id="platos" class="platos" data-aos="fade-up">
-    <h2>Platos Destacados</h2>
-    <div class="galeria" id="lightgallery-platos">
-      <a href="lomo saltado.jpg" data-sub-html="<h4>Lomo Saltado</h4>">
-        <img src="lomo saltado.jpg" alt="Lomo Saltado">
-      </a>
-      <a href="tacu tacu de mariscos.jpeg" data-sub-html="<h4>Tacu Tacu de Mariscos</h4>">
-        <img src="tacu tacu de mariscos.jpeg" alt="Tacu tacu de mariscos">
-      </a>
-      <a href="ceviche.jpg" data-sub-html="<h4>Ceviche Clásico</h4>">
-        <img src="ceviche.jpg" alt="Ceviche">
-      </a>
-      <a href="aji de gallina.jpeg" data-sub-html="<h4>Ají de Gallina</h4>">
-        <img src="aji de gallina.jpeg" alt="Aji de gallina">
-      </a>
+    </div>
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      <span>Explorar</span>
     </div>
   </section>
 
-  <section id="menu" class="menu" data-aos="fade-up">
-    <h2>Nuestro Menú en la Web</h2>
-    <div class="menu-items-container">
-      <div class="menu-categoria" data-aos="fade-right">
-        <h3>Entradas y Aperitivos</h3>
-        <div class="plato-item">
-          <p class="nombre-plato">Papa a la Huancaína <span></span></p>
-          <p class="descripcion-plato">Rodajas de papa bañadas en salsa cremosa de ají amarillo y queso.</p>
-          </div>
-      </div>
-      <div class="menu-categoria" data-aos="fade-left">
-        <h3>Carnes y Pollos</h3>
-        <div class="plato-item">
-          <p class="nombre-plato">Lomo Saltado <span></span></p>
-          <p class="descripcion-plato">Jugosos trozos de lomo salteados al wok con cebolla, tomate y papas fritas.</p>
+  <!-- STATS BAR -->
+  <div class="stats-bar reveal">
+    <div class="stat-item">
+      <div class="stat-num">+15</div>
+      <div class="stat-label">Años de tradición</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">+30</div>
+      <div class="stat-label">Platos en carta</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">Lun–Dom</div>
+      <div class="stat-label">11:00 – 20:00 hrs</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">Delivery</div>
+      <div class="stat-label">La Florida y alrededores</div>
+    </div>
+  </div>
+
+  <!-- PLATOS DESTACADOS -->
+  <section id="platos" class="section-pad">
+    <div class="reveal">
+      <p class="section-label">Lo mejor de nuestra cocina</p>
+      <h2 class="section-title">Platos <em>Destacados</em></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="platos-grid reveal">
+      <div class="plato-card" onclick="openLightbox(this.querySelector('img').src)">
+        <img src="https://restauranteelchavin.cl/lomo%20saltado.jpg" alt="Lomo Saltado" loading="lazy" />
+        <div class="plato-overlay">
+          <div class="plato-name">Lomo Saltado</div>
+          <div class="plato-desc">Trozos de lomo salteados al wok con cebolla, tomate y papas fritas. Clásico irresistible.</div>
         </div>
       </div>
+      <div class="plato-card" onclick="openLightbox(this.querySelector('img').src)">
+        <img src="https://restauranteelchavin.cl/ceviche.jpg" alt="Ceviche" loading="lazy" />
+        <div class="plato-overlay">
+          <div class="plato-name">Ceviche</div>
+          <div class="plato-desc">Pescado fresco marinado en limón y ají, acompañado de choclo y camote. Fresco y potente.</div>
+        </div>
       </div>
-  </section>
-
-  <section id="historia" class="historia" data-aos="fade-up">
-    <h2>Historia de la Cultura Chavín de Huántar</h2>
-    <p>
-      En los años 800 y 500 A.C. Los habitantes del área andina vivían
-      basados en la economía agricola, además tenían un sistema de
-      culto religioso muy desarrollado, su expansión de Chavin hasta
-      Ayacucho e Inca por el sur y hasta cerca del Ecuador por el Norte.
-      Los hombres de Chavin desarrollaron métodos de irrigación, tanto
-      en la costa, como en la sierra. Chavin tuvo principalmente una
-      economia agricola cultivando el maíz, la caza pesca y recolección.
-      El más conocido de estos centros ceremoniales es el de Chavin
-      de huantar ubicado a orillas del río marañon en la sierra del actual
-      departamento de ancash, en la provincia huari a 3.177 m.s.n.m.
-      Chavin es un conjunto de construcciones dentro de los cuales al
-      edificio central se le conoce con el nombre de Castillo. Este está
-      hecho de grandes bloques de piedra tallada en forma paralelepipeda,
-      a manera de tablones unidos con barro y dispuestos horizontalmente
-      con un sistema de alternación de grandes piedras.
-    </p>
-  </section>
-
-  <section id="contacto" class="contacto" data-aos="fade-up">
-    <h2>Contácto - Ubicación</h2>
-    <div class="contacto-info-wrapper">
-      <div class="contacto-info" data-aos="fade-right">
-        <p><i class="fas fa-map-marker-alt"></i> <strong>Dirección:</strong> Av. San Jose de la Estrella #850, La Florida, Santiago.</p>
-        <p><i class="far fa-clock"></i> <strong>Horario de Atención:</strong> Lun - Dom: 11:00 - 20:00 hrs.</p>
-        <p><i class="fas fa-phone"></i> <strong>Reservas y delivery:</strong> <a href="tel:+56961956012">+56 9 6195 6012</a></p>
-        <a href="https://wa.me/56961956012" target="_blank" class="whatsapp">
-          <i class="fab fa-whatsapp"></i> Escríbenos por WhatsApp
-        </a>
+      <div class="plato-card" onclick="openLightbox(this.querySelector('img').src)">
+        <img src="https://restauranteelchavin.cl/tacu%20tacu%20de%20mariscos.jpeg" alt="Tacu Tacu de Mariscos" loading="lazy" />
+        <div class="plato-overlay">
+          <div class="plato-name">Tacu Tacu de Mariscos</div>
+          <div class="plato-desc">Mezcla cremosa de frijoles y arroz con mariscos frescos. Una delicia de la costa peruana.</div>
+        </div>
       </div>
-      <div class="mapa-ubicacion" data-aos="fade-left">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3324.9830324075892!2d-70.59836012430469!3d-33.553817173348875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662d13319545979%3A0xa115789cde60f40f!2sAv.%20San%20Jos%C3%A9%20de%20la%20Estrella%20850%2C%208310042%20La%20Florida%2C%20Regi%C3%B3n%20Metropolitana!5e0!3m2!1ses-419!2scl!4v1757435775687!5m2!1ses-419!2scl" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <div class="plato-card" onclick="openLightbox(this.querySelector('img').src)">
+        <img src="https://restauranteelchavin.cl/aji%20de%20gallina.jpeg" alt="Ají de Gallina" loading="lazy" />
+        <div class="plato-overlay">
+          <div class="plato-name">Ají de Gallina</div>
+          <div class="plato-desc">Pollo desmenuzado en cremosa salsa de ají amarillo con nueces. Reconfortante y único.</div>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- MENÚ COMPLETO -->
+  <section id="menu" class="section-pad">
+    <div class="reveal">
+      <p class="section-label">Nuestra carta</p>
+      <h2 class="section-title">Menú <em>Completo</em></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="menu-tabs reveal">
+      <button class="tab-btn active" onclick="switchTab(this, 'entradas')">Entradas</button>
+      <button class="tab-btn" onclick="switchTab(this, 'fondos')">Fondos</button>
+      <button class="tab-btn" onclick="switchTab(this, 'mariscos')">Mariscos</button>
+      <button class="tab-btn" onclick="switchTab(this, 'pollos')">Pollos y Carnes</button>
+      <button class="tab-btn" onclick="switchTab(this, 'bebidas')">Bebidas</button>
+    </div>
+
+    <div id="entradas" class="menu-panel active reveal">
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <div class="menu-item-name">Papa a la Huancaína</div>
+          <div class="menu-item-price">$4.500</div>
+        </div>
+        <div class="menu-item-desc">Rodajas de papa bañadas en salsa cremosa de ají amarillo y queso fresco.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <div class="menu-item-name">Causa Limeña</div>
+          <div class="menu-item-price">$5.200</div>
+        </div>
+        <div class="menu-item-desc">Pastel frío de papa amarilla condimentada, rellena con atún o pollo y palta.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <div class="menu-item-name">Tequeños con Guacamole</div>
+          <div class="menu-item-price">$4.800</div>
+        </div>
+        <div class="menu-item-desc">Palitos de masa frita rellenos de queso crema, acompañados de guacamole casero.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <div class="menu-item-name">Anticuchos de Corazón</div>
+          <div class="menu-item-price">$5.500</div>
+        </div>
+        <div class="menu-item-desc">Brochetas de corazón de vacuno marinado en ají panca, a las brasas. Emblema de la calle peruana.</div>
+      </div>
+    </div>
+
+    <div id="fondos" class="menu-panel reveal">
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <div class="menu-item-name">Lomo Saltado</div>
+          <div class="menu-item-price">$9.900</div>
+        </div>
+        <div class="menu-item-desc">Lomo fino salteado al wok con cebolla, tomate, sillao y papas fritas. Acompañado de arroz blanco.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <div class="menu-item-name">Ají de Gallina</div>
+          <div class="menu-item-price">$8.500</div>
+        </div>
+        <div class="menu-item-desc">Pollo desmenuzado en salsa de ají amarillo con leche, pan remojado y nueces. Con arroz y papa.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <div class="menu-item-name">Seco de Cordero</div>
+          <div class="menu-item-price">$10.500</div>
+        </div>
+        <div class="menu-item-desc">Guiso tradicional de cordero con culantro, chicha de jora y frijoles. Plato de celebración.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <div class="menu-item-name">Tacu Tacu con Bistec</div>
+          <div class="menu-item-price">$9.500</div>
+        </div>
+        <div class="menu-item-desc">Tortilla de frijoles y arroz frita, con bistec apanado y salsa criolla.</div>
+      </div>
+    </div>
+
+    <div id="mariscos" class="menu-panel reveal">
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <div class="menu-item-name">Ceviche Clásico</div>
+          <div class="menu-item-price">$9.200</div>
+        </div>
+        <div class="menu-item-desc">Pescado fresco marinado en leche de tigre, ají limo, cebolla morada. Con choclo y camote.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <div class="menu-item-name">Arroz con Mariscos</div>
+          <div class="menu-item-price">$11.000</div>
+        </div>
+        <div class="menu-item-desc">Arroz cremoso con camarones, choritos, calamares y pulpo. Sabor a océano puro.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <div class="menu-item-name">Tacu Tacu de Mariscos</div>
+          <div class="menu-item-price">$11.500</div>
+        </div>
+        <div class="menu-item-desc">Tortilla de frijoles con arroz, coronada con salteado de mariscos frescos en salsa criolla.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <div class="menu-item-name">Chupe de Camarones</div>
+          <div class="menu-item-price">$10.800</div>
+        </div>
+        <div class="menu-item-desc">Sopa espesa con camarones, papas, choclo, ají amarillo, leche y huevo. Un abrazo de sabor.</div>
+      </div>
+    </div>
+
+    <div id="pollos" class="menu-panel reveal">
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <div class="menu-item-name">Pollo a las Brasas (Entero)</div>
+          <div class="menu-item-price">$14.900</div>
+        </div>
+        <div class="menu-item-desc">Pollo marinado en especias peruanas, cocido lentamente a las brasas. Con papas fritas y ensalada.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <div class="menu-item-name">Pollo a las Brasas (1/2)</div>
+          <div class="menu-item-price">$8.500</div>
+        </div>
+        <div class="menu-item-desc">Media unidad con guarnición de papas fritas y ensalada a elección.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <div class="menu-item-name">Pollo a la Brasa (1/4)</div>
+          <div class="menu-item-price">$5.200</div>
+        </div>
+        <div class="menu-item-desc">Cuarto de pollo a las brasas con papas fritas. Ideal para almorzar liviano.</div>
+      </div>
+    </div>
+
+    <div id="bebidas" class="menu-panel reveal">
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <div class="menu-item-name">Pisco Sour</div>
+          <div class="menu-item-price">$4.500</div>
+        </div>
+        <div class="menu-item-desc">El clásico peruano: pisco, limón, jarabe, clara de huevo y angostura. Espumoso y refrescante.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <div class="menu-item-name">Chicha Morada</div>
+          <div class="menu-item-price">$2.500</div>
+        </div>
+        <div class="menu-item-desc">Bebida ancestral de maíz morado con piña, canela y clavo. Dulce y exótica.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <div class="menu-item-name">Maracuyá Sour</div>
+          <div class="menu-item-price">$4.800</div>
+        </div>
+        <div class="menu-item-desc">Variante tropical del pisco sour con maracuyá fresco. Tropical y vibrante.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <div class="menu-item-name">Inca Kola</div>
+          <div class="menu-item-price">$1.800</div>
+        </div>
+        <div class="menu-item-desc">La bebida dorada del Perú. Dulce y aromática, combina perfectamente con toda la carta.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:32px; font-size:0.78rem; color:rgba(245,237,214,0.35); font-style:italic;" class="reveal">
+      * Precios de referencia. Consultar carta vigente. Todos los precios incluyen IVA.
+    </div>
+  </section>
+
+  <!-- HISTORIA -->
+  <section id="historia" class="section-pad">
+    <div class="historia-inner">
+      <div class="historia-img-wrap reveal">
+        <img src="https://restauranteelchavin.cl/lomo%20saltado.jpg" alt="Historia El Chavín" loading="lazy" />
+        <div class="historia-img-badge">
+          <strong>800</strong>
+          <span>Años A.C.</span>
+        </div>
+      </div>
+      <div class="historia-text reveal">
+        <p class="section-label">Raíces milenarias</p>
+        <h2 class="section-title">Cultura <em>Chavín</em></h2>
+        <div class="divider"></div>
+        <div class="historia-quote">
+          <p>"Una cocina que honra a quienes cultivaron la tierra, la mar y las alturas andinas."</p>
+        </div>
+        <p>
+          En los años 800 y 500 A.C., los habitantes del área andina vivían basados en la economía agrícola
+          y tenían un sistema de culto religioso muy desarrollado. Su influencia se extendió desde Chavín
+          hasta Ayacucho, Inca, y hacia el norte, cerca del Ecuador.
+        </p>
+        <p>
+          El más conocido de sus centros ceremoniales es el de <strong>Chavín de Huántar</strong>, ubicado
+          en la sierra del departamento de Ancash, a 3.177 msnm. Sus grandes bloques de piedra tallada
+          hablan de una civilización que dominó técnicas de irrigación, arquitectura y sazón que llegan
+          hasta nuestra mesa hoy.
+        </p>
+        <p>
+          Nuestro restaurante lleva ese nombre con orgullo: cada plato es un tributo a esa historia
+          que nació en los Andes y hoy conquista Santiago.
+        </p>
+        <a href="https://wa.me/56961956012" target="_blank" class="btn-primary" style="margin-top:8px; display:inline-flex;">
+          💬 Reserva tu Mesa
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="section-pad">
+    <div class="reveal">
+      <p class="section-label">Encuéntranos</p>
+      <h2 class="section-title">Visítanos en <em>La Florida</em></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="contacto-inner">
+      <div>
+        <div class="info-cards reveal">
+          <div class="info-card">
+            <div class="info-icon">📍</div>
+            <div>
+              <h4>Dirección</h4>
+              <p>Av. San José de la Estrella #850<br/>La Florida, Santiago</p>
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="info-icon">🕐</div>
+            <div>
+              <h4>Horario de atención</h4>
+              <p>Lunes a Domingo<br/>11:00 – 20:00 hrs</p>
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="info-icon">📞</div>
+            <div>
+              <h4>Reservas y Delivery</h4>
+              <a href="tel:+56961956012">+56 9 6195 6012</a>
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="info-icon">💬</div>
+            <div>
+              <h4>WhatsApp</h4>
+              <a href="https://wa.me/56961956012" target="_blank">Escríbenos directamente →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="redes reveal">
+          <a href="https://www.facebook.com/restaurantelchavin/" target="_blank" class="red-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            Facebook
+          </a>
+          <a href="https://www.instagram.com/el_chavin" target="_blank" class="red-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            Instagram
+          </a>
+          <a href="https://www.tiktok.com/@el.chavin.restaur" target="_blank" class="red-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
+            TikTok
+          </a>
+        </div>
+      </div>
+
+      <div class="mapa-wrap reveal">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3324.9830324075892!2d-70.59836012430469!3d-33.553817173348875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662d13319545979%3A0xa115789cde60f40f!2sAv.%20San%20Jos%C3%A9%20de%20la%20Estrella%20850%2C%208310042%20La%20Florida%2C%20Regi%C3%B3n%20Metropolitana!5e0!3m2!1ses-419!2scl!4v1757435775687!5m2!1ses-419!2scl"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer>
-    <p>© 2025 El Chavín - Todos los derechos reservados.</p>
+    <img src="https://restauranteelchavin.cl/LogoChavin.png" alt="El Chavín" />
+    <p>© 2025 El Chavín · Restaurante Peruano · La Florida, Santiago · Todos los derechos reservados</p>
+    <p style="color:rgba(245,237,214,0.2); font-size:0.7rem;">Diseño web por ARM</p>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/lightgallery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <!-- WHATSAPP FLOTANTE -->
+  <a href="https://wa.me/56961956012" target="_blank" class="wa-float" title="Escríbenos por WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close" onclick="closeLightbox()">×</span>
+    <img id="lightbox-img" src="" alt="" />
+  </div>
+
   <script>
-    // Inicializar Lightgallery
-    lightGallery(document.getElementById('lightgallery-platos'), {
-        selector: 'a',
-        download: false
+    // NAVBAR SCROLL
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
     });
 
-    // Inicializar AOS
-    AOS.init({
-      duration: 800, // Duración de la animación
-      once: true,    // Animar solo una vez
-    });
+    // HAMBURGER
+    function toggleMenu() {
+      const hb = document.getElementById('hamburger');
+      const mm = document.getElementById('mobileMenu');
+      hb.classList.toggle('open');
+      mm.classList.toggle('open');
+    }
+    function closeMenu() {
+      document.getElementById('hamburger').classList.remove('open');
+      document.getElementById('mobileMenu').classList.remove('open');
+    }
+
+    // TABS MENÚ
+    function switchTab(btn, panelId) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(panelId).classList.add('active');
+    }
+
+    // LIGHTBOX
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    // REVEAL ON SCROLL
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
   </script>
 </body>
 </html>

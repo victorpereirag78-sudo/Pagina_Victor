@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Menú completo del Restaurante El Chavín — Gastronomía peruana auténtica en La Florida, Santiago."/>
+  <title>Menú · El Chavín · Restaurante Peruano</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --rojo:   #C0392B;
+      --oro:    #D4A017;
+      --crema:  #F5EDD6;
+      --carbon: #1A1008;
+      --humo:   #221508;
+      --gris:   rgba(245,237,214,0.5);
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--carbon);
+      color: var(--crema);
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--humo);
+      border-bottom: 2px solid var(--rojo);
+      padding: 24px 5% 20px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+    .header-logo img {
+      height: 40px;
+      filter: drop-shadow(0 0 6px rgba(212,160,23,0.4));
+    }
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 5vw, 1.9rem);
+      font-weight: 900;
+      letter-spacing: 0.02em;
+    }
+    header h1 em { font-style: italic; color: var(--oro); }
+    header p {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gris);
+      margin-top: 4px;
+    }
+
+    /* ── NAV TABS ── */
+    .tab-nav {
+      display: flex;
+      overflow-x: auto;
+      gap: 4px;
+      padding: 12px 5%;
+      background: rgba(0,0,0,0.3);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .tab-nav::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      flex-shrink: 0;
+      background: transparent;
+      border: 1px solid rgba(245,237,214,0.15);
+      color: var(--gris);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 8px 14px;
+      border-radius: 2px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .tab-btn:hover { color: var(--oro); border-color: var(--oro); }
+    .tab-btn.active {
+      background: var(--rojo);
+      border-color: var(--rojo);
+      color: #fff;
+    }
+
+    /* ── AVISO PRECIOS ── */
+    .aviso {
+      margin: 0;
+      padding: 10px 5%;
+      background: rgba(212,160,23,0.08);
+      border-bottom: 1px solid rgba(212,160,23,0.15);
+      font-size: 0.72rem;
+      color: rgba(212,160,23,0.7);
+      text-align: center;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── SECCIONES ── */
+    .menu-section { display: none; padding: 8px 0 40px; }
+    .menu-section.active { display: block; }
+
+    .section-header {
+      padding: 28px 5% 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 5vw, 1.8rem);
+      font-weight: 700;
+    }
+    .section-header h2 em { font-style: italic; color: var(--oro); }
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, rgba(192,57,43,0.6), transparent);
+    }
+
+    /* Sub-categorías */
+    .subcategoria {
+      padding: 6px 5% 4px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--rojo);
+      margin-top: 12px;
+    }
+
+    /* ── CARDS ── */
+    .items-list {
+      padding: 0 5%;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .menu-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 2px;
+      padding: 16px 18px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .menu-item:active,
+    .menu-item:hover {
+      background: rgba(212,160,23,0.06);
+      border-color: rgba(212,160,23,0.2);
+    }
+    .item-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .item-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.3;
+      flex: 1;
+    }
+    .item-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--oro);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .item-desc {
+      font-size: 0.8rem;
+      color: rgba(245,237,214,0.52);
+      line-height: 1.6;
+      margin-top: 6px;
+    }
+
+    /* ── GUARNICIONES / POSTRES / BEBIDAS: layout 2 col en desktop ── */
+    .items-grid {
+      padding: 0 5%;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 2px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 32px 5%;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      margin-top: 20px;
+    }
+    footer img { height: 36px; margin: 0 auto 12px; filter: brightness(0.55); }
+    footer p { font-size: 0.75rem; color: rgba(245,237,214,0.3); line-height: 1.7; }
+    .wa-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #25D366;
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 12px 24px;
+      border-radius: 2px;
+      margin: 16px 0 24px;
+      transition: opacity 0.2s;
+    }
+    .wa-btn:hover { opacity: 0.9; }
+
+    /* ── WA FLOAT ── */
+    .wa-float {
+      position: fixed;
+      bottom: 20px; right: 20px;
+      z-index: 999;
+      width: 52px; height: 52px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 18px rgba(37,211,102,0.45);
+      transition: transform 0.2s;
+    }
+    .wa-float:hover { transform: scale(1.1); }
+    .wa-float svg { width: 26px; height: 26px; fill: #fff; }
+
+    /* ── BACK LINK ── */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(245,237,214,0.4);
+      padding: 10px 5% 0;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--oro); }
+
+    @media (max-width: 480px) {
+      .items-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-logo">
+      <img src="./images/LogoChavin.png" alt="El Chavín" onerror="this.style.display='none'"/>
+    </div>
+    <h1>El <em>Chavín</em></h1>
+    <p>Carta · Gastronomía Peruana Auténtica</p>
+  </header>
+
+  <!-- TABS NAV -->
+  <nav class="tab-nav" role="tablist">
+    <button class="tab-btn active" onclick="switchTab(this,'sopas')">🍲 Sopas</button>
+    <button class="tab-btn" onclick="switchTab(this,'entradas')">🥗 Entradas</button>
+    <button class="tab-btn" onclick="switchTab(this,'pescados')">🐟 Pescados</button>
+    <button class="tab-btn" onclick="switchTab(this,'mariscos')">🦐 Mariscos</button>
+    <button class="tab-btn" onclick="switchTab(this,'carnes')">🥩 Carnes</button>
+    <button class="tab-btn" onclick="switchTab(this,'pollos')">🍗 Pollos</button>
+    <button class="tab-btn" onclick="switchTab(this,'guarniciones')">🍟 Guarniciones</button>
+    <button class="tab-btn" onclick="switchTab(this,'postres')">🍮 Postres</button>
+    <button class="tab-btn" onclick="switchTab(this,'bebidas')">🥤 Bebidas</button>
+  </nav>
+
+  <p class="aviso">⚠️ Precios referenciales — pueden variar según disponibilidad.</p>
+
+  <a href="index.html" class="back-link">← Volver al inicio</a>
+
+  <!-- ════════════════════════════════ SOPAS ════════════════════════════════ -->
+  <section id="sopas" class="menu-section active">
+    <div class="section-header">
+      <h2>🍲 <em>Sopas</em></h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="items-list">
+      <div class="menu-item">
+        <div class="item-row">
+          <div class="item-name">Chupe de Camarones</div>
+          <div class="item-price">$10.100</div>
+        </div>
+        <div class="item-desc">Camarones, papa amarilla, choclo, queso, arroz y leche acompañada de un huevo escalfado.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row">
+          <div class="item-name">Chupe de Pescado</div>
+          <div class="item-price">$11.300</div>
+        </div>
+        <div class="item-desc">Filete de pescado en trozos, papa amarilla, choclo, queso y leche acompañada de un huevo escalfado.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row">
+          <div class="item-name">Parihuela</div>
+          <div class="item-price">$10.900</div>
+        </div>
+        <div class="item-desc">Sopa a base de pescado, calamares, pulpitos, mejillones y especias.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row">
+          <div class="item-name">Dieta de Pollo</div>
+          <div class="item-price">$7.900</div>
+        </div>
+        <div class="item-desc">Trozos de pechuga de pollo cocida con verduras, papa amarilla y fideos cabello de ángel.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════ ENTRADAS ════════════════════════════════ -->
+  <section id="entradas" class="menu-section">
+    <div class="section-header">
+      <h2>🥗 <em>Entradas</em></h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="items-list">
+      <div class="menu-item">
+        <div class="item-row">
+          <div class="item-name">Yucas Fritas con Salsa Huancaína</div>
+          <div class="item-price">$7.500</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row">
+          <div class="item-name">Causa Limeña con Atún</div>
+          <div class="item-price">$7.200</div>
+        </div>
+        <div class="item-desc">Puré de papas con aceite de oliva, gotas de limón y un punto de ají amarillo relleno con palta, atún y mayonesa.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row">
+          <div class="item-name">Causa Limeña con Camarones</div>
+          <div class="item-price">$8.800</div>
+        </div>
+        <div class="item-desc">Puré de papas con aceite de oliva, gotas de limón y un punto de ají amarillo relleno con palta, camarones y mayonesa.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row">
+          <div class="item-name">Causa Limeña de Pollo en Salsa Huancaína</div>
+          <div class="item-price">$7.900</div>
+        </div>
+        <div class="item-desc">Puré de papas con aceite de oliva, gotas de limón y un punto de ají amarillo relleno con palta, pollo y mayonesa bañado en salsa Huancaína.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row">
+          <div class="item-name">Ocopa</div>
+          <div class="item-price">$7.800</div>
+        </div>
+        <div class="item-desc">Papas cocidas bañadas en suave salsa de leche, galletas, maní, queso fresco y huacatay.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row">
+          <div class="item-name">Papas a la Huancaína</div>
+          <div class="item-price">$5.500</div>
+        </div>
+        <div class="item-desc">Papas cocidas bañadas con una salsa de leche, galletas, maní, queso fresco y un punto de ají amarillo.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row">
+          <div class="item-name">Leche de Tigre</div>
+          <div class="item-price">$7.200</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row">
+          <div class="item-name">Leche de Pantera</div>
+          <div class="item-price">$7.200</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════ PESCADOS ════════════════════════════════ -->
+  <section id="pescados" class="menu-section">
+    <div class="section-header">
+      <h2>🐟 <em>Pescados</em></h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="items-list">
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Ceviche de Pescado</div><div class="item-price">$10.100</div></div>
+        <div class="item-desc">Delicados trozos de pescado en cubos marinados en jugo de limón de pica y especias al mejor estilo peruano.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Ceviche Mixto</div><div class="item-price">$11.500</div></div>
+        <div class="item-desc">Mixtura de mariscos y pescados marinados en jugo de limón de pica, punto de ají, cebolla corte pluma y especias.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Ceviche Mixto Especial</div><div class="item-price">$12.900</div></div>
+        <div class="item-desc">Ceviche mixto acompañado con yuca y choclo peruano.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Trío de Ceviche (3 pax)</div><div class="item-price">$22.100</div></div>
+        <div class="item-desc">Marisco, corvina y salmón servidos con camote, choclo, cebolla morada y canchita.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Pescado en Salsa Andina</div><div class="item-price">$10.500</div></div>
+        <div class="item-desc">Filete de pescado relleno con alcachofas, queso fresco y espinacas, cocido al vapor y bañado en salsa de alcachofas. Con arroz con choclo.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Pescado en Salsa de Camarones</div><div class="item-price">$11.300</div></div>
+        <div class="item-desc">Filete de pescado a la plancha bañado con suave salsa de colitas de camarones. Con arroz.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Pescado con Salsa de Ostiones y Camarones</div><div class="item-price">$11.500</div></div>
+        <div class="item-desc">Pescado a la plancha con salsa de ostiones, camarones y un punto de vino blanco al romero. Con arroz y choclo.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Pescado con Mariscos a la Criolla</div><div class="item-price">$11.000</div></div>
+        <div class="item-desc">Filete a la plancha bañado con salsa de calamares, ostiones, pulpo, camarones, punto de ají y crema de leche. Con arroz y choclo.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Jalea Mixta Especial (3 pax)</div><div class="item-price">$22.000</div></div>
+        <div class="item-desc">Trozos de pescado y mariscos fritos con sarza criolla, choclo peruano, yucas fritas y salsa tártara.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">½ Jalea Mixta Especial</div><div class="item-price">$14.100</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Chicharrón de Pescado</div><div class="item-price">$10.100</div></div>
+        <div class="item-desc">Trozos de pescado frito servidos con papas doradas y sarza criolla.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Dúo Marino</div><div class="item-price">$12.100</div></div>
+        <div class="item-desc">Filete de corvina y salmón a la plancha, con un toque de coñac, bañados en salsa de rocoto con panaché de verduras.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Pescado a lo Macho</div><div class="item-price">$12.900</div></div>
+        <div class="item-desc">Filete de pescado a la plancha bañado en salsa de mariscos al vino blanco con punto de ají. Con arroz blanco.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Pescado a la Chorrillana</div><div class="item-price">$10.200</div></div>
+        <div class="item-desc">Filete de pescado a la plancha bañado en salsa a base de vino blanco, trozos de cebolla y tomate.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Pescado al Estilo El Chavín</div><div class="item-price">$10.800</div></div>
+        <div class="item-desc">Filete de pescado a la plancha bañado en salsa de huacatay y cerveza, con pimientos, champiñones y zapallitos salteados.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Sudado de Pescado</div><div class="item-price">$10.500</div></div>
+        <div class="item-desc">Filete de pescado cocido al vapor con cebolla, tomate, pimienta negra y especias en su caldo. Con arroz blanco.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Salmón al Estilo Chavín</div><div class="item-price">$10.100</div></div>
+        <div class="item-desc">Filete de salmón a la plancha bañado en salsa blanca con mariscos, champiñones y punto de vino blanco aromatizado al romero.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Salmón Oriental</div><div class="item-price">$10.200</div></div>
+        <div class="item-desc">Filete de salmón a la plancha con salsa oriental, verduras, salsa de soya y semillas de sésamo.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════ MARISCOS ════════════════════════════════ -->
+  <section id="mariscos" class="menu-section">
+    <div class="section-header">
+      <h2>🦐 <em>Mariscos</em></h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="items-list">
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Camarones Ecuatorianos al Estilo del Chef</div><div class="item-price">$11.100</div></div>
+        <div class="item-desc">Camarones envueltos con filetitos de pollo a la plancha bañados con salsa oriental. Con arroz con choclo a la crema.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Chicharrón de Calamar</div><div class="item-price">$10.800</div></div>
+        <div class="item-desc">Aros de calamares fritos servidos con papas doradas y sarza criolla.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Picante de Mariscos</div><div class="item-price">$10.500</div></div>
+        <div class="item-desc">Mixtura de mariscos cocidos en un guiso con crema caliente y un punto de ají. Con arroz blanco.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Pescado en Salsa de Mariscos</div><div class="item-price">$10.000</div></div>
+        <div class="item-desc">Filete de pescado a la plancha bañado con suave salsa de mariscos con punto de crema. Con arroz blanco.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Tacu Tacu con Mariscos</div><div class="item-price">$11.800</div></div>
+        <div class="item-desc">Mezcla de porotos y arroz a la sartén con salsa especial de mariscos.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Cau Cau de Mariscos</div><div class="item-price">$10.500</div></div>
+        <div class="item-desc">Guiso de mariscos con verduras y papas cocidas, aromatizado con hierba buena y palillo.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Arroz con Mariscos</div><div class="item-price">$10.800</div></div>
+        <div class="item-desc">Arroz a las especias salteado con mariscos, guisantes y choclo desgranado.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Picante de Camarones</div><div class="item-price">$11.100</div></div>
+        <div class="item-desc">Camarones cocidos en un guiso con crema caliente y un punto de ají. Con arroz blanco.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Tallarín Saltado de Mariscos</div><div class="item-price">$10.100</div></div>
+        <div class="item-desc">Fideos saltados con camarones, calamar y ostiones en aceite de oliva, cebolla, tomates, cebollines y salsa de soya.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Arroz Chaufa de Mariscos</div><div class="item-price">$10.900</div></div>
+        <div class="item-desc">Arroz a las especias orientales salteado con mixtura de mariscos en aceite de sésamo con cebollines, pimientos rojos y salsa de soya.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════ CARNES ════════════════════════════════ -->
+  <section id="carnes" class="menu-section">
+    <div class="section-header">
+      <h2>🥩 <em>Carnes</em></h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="items-list">
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Lomo Saltado</div><div class="item-price">$10.800</div></div>
+        <div class="item-desc">Trozos de lomo liso salteado en cebolla, tomate y especias. Con arroz y papas fritas.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Pollo Saltado</div><div class="item-price">$9.100</div></div>
+        <div class="item-desc">Trozos de pollo salteado en cebolla, tomate y especias. Con arroz y papas fritas.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Tallarines Saltados Tres Sabores</div><div class="item-price">$11.800</div></div>
+        <div class="item-desc">Fideos saltados con trozos de pollo, vacuno y camarones en aceite de oliva, cebolla, tomates, cebollines y salsa de soya.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Chicharrón de Pollo</div><div class="item-price">$9.100</div></div>
+        <div class="item-desc">Filete de pollo frito servido con sarza criolla y papas fritas.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Milanesa de Carne</div><div class="item-price">$9.800</div></div>
+        <div class="item-desc">Filete de lomo liso apanado a la plancha. Con papas fritas y ensalada.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Seco de Vacuno</div><div class="item-price">$10.100</div></div>
+        <div class="item-desc">Trozos de vacuno a la cacerola con salsa a base de cerveza, cilantro y especias. Con frijoles y arroz.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Lomo a lo Macho</div><div class="item-price">$20.100</div></div>
+        <div class="item-desc">Al estilo Chavín — mar y tierra.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Pollo a la Chiclayana</div><div class="item-price">$11.200</div></div>
+        <div class="item-desc">Pechuga de pollo rellena con espinacas, queso fresco y champiñones. Con arroz verde al cilantro.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Arroz Chaufa de Carne</div><div class="item-price">$10.800</div></div>
+        <div class="item-desc">Arroz a las especias orientales salteado con carne de vacuno en aceite de sésamo, cebollines, pimientos y salsa de soya.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Arroz Chaufa con Pollo</div><div class="item-price">$9.400</div></div>
+        <div class="item-desc">Arroz a las especias orientales salteado con trozos de pollo en aceite de sésamo, cebollines, pimientos y salsa de soya.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Arroz Chaufa 3 Sabores</div><div class="item-price">$11.800</div></div>
+        <div class="item-desc">Arroz a las especias orientales salteado con pollo, vacuno y camarones en aceite de sésamo, cebollines, pimientos y salsa de soya.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Tallarines Saltados con Pollo</div><div class="item-price">$9.100</div></div>
+        <div class="item-desc">Fideos saltados con trozos de pollo en aceite de oliva, cebolla, tomates, cebollines y salsa de soya.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Tallarines a la Huancaína</div><div class="item-price">$11.200</div></div>
+        <div class="item-desc">Deliciosa salsa a base de ají amarillo y queso fresco. Con lomo liso.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Tallarines Saltados con Carne</div><div class="item-price">$10.900</div></div>
+        <div class="item-desc">Fideos saltados con carne de vacuno en aceite de oliva, cebolla, tomates, cebollines y salsa de soya.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Tallarines Saltados de Verduras</div><div class="item-price">$8.300</div></div>
+        <div class="item-desc">Champiñones, cebolla morada, zapallo italiano, tomate y especias en salsa de ostiones y sillao.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Tallarines Saltados a la Huancaína</div><div class="item-price">$10.900</div></div>
+        <div class="item-desc">Tallarines con salsa a la huancaína con trozos de lomo liso salteado en cebolla, tomate y especias.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Ají de Gallina</div><div class="item-price">$9.100</div></div>
+        <div class="item-desc">Pechuga de pollo deshilachada en crema de leche caliente con nueces y ají. Con arroz blanco.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Salpicón de Pollo</div><div class="item-price">$7.300</div></div>
+        <div class="item-desc">Ensalada fría base de lechuga, tomate, zanahoria, papas cocidas, arvejas, pechuga de pollo, palta y vinagreta.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Tacu Tacu con Lomo Liso</div><div class="item-price">$10.500</div></div>
+        <div class="item-desc">Mezcla de porotos y arroz a la sartén, con filete de vacuno y huevos fritos montados.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Tacu Tacu con Lomo Saltado</div><div class="item-price">$10.500</div></div>
+        <div class="item-desc">Mezcla de porotos y arroz a la sartén, con saltado de trozos de lomo liso en cebolla, tomate y especias.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Lomo Liso al Pisco Peruano</div><div class="item-price">$11.900</div></div>
+        <div class="item-desc">Lomo liso a la plancha con especias bañado en salsa especial con pisco peruano y risotto verde.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Lomo en Salsa Olivar</div><div class="item-price">$10.700</div></div>
+        <div class="item-desc">Lomo liso a la plancha con especias bañado en salsa de olivo. Con arroz con choclo.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Filete de Vacuno en Salsa de Camarones y Ostiones</div><div class="item-price">$11.500</div></div>
+        <div class="item-desc">Filete de vacuno a la plancha bañado con salsa de camarones, ostiones y estragón. Con arroz y choclo.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════ POLLOS A LAS BRASAS ════════════════════ -->
+  <section id="pollos" class="menu-section">
+    <div class="section-header">
+      <h2>🍗 Pollos <em>a las Brasas</em></h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="items-list">
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">¼ Pollo</div><div class="item-price">$8.900</div></div>
+        <div class="item-desc">Papas fritas + ensaladas + ají y cremas.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">½ Pollo</div><div class="item-price">$10.900</div></div>
+        <div class="item-desc">Papas fritas + ensaladas + ají y cremas.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">1 Pollo Entero</div><div class="item-price">$21.000</div></div>
+        <div class="item-desc">Papas fritas + ensaladas + ají y cremas.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Salchipollo</div><div class="item-price">$6.800</div></div>
+        <div class="item-desc">⅛ Pollo + papas fritas + vienesas + ensaladas + ají y cremas.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Salchipapas</div><div class="item-price">$5.800</div></div>
+        <div class="item-desc">Papas fritas + vienesas + ají + cremas y ensalada.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Suprema de Pollo</div><div class="item-price">$8.600</div></div>
+        <div class="item-desc">Filete de pollo apanado a la plancha + papas fritas + ensaladas.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Pollo a la Plancha</div><div class="item-price">$7.800</div></div>
+        <div class="item-desc">Agregado a elección: arroz, papas fritas o ensalada.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════ GUARNICIONES ════════════════════════════ -->
+  <section id="guarniciones" class="menu-section">
+    <div class="section-header">
+      <h2>🍟 <em>Guarniciones</em></h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="items-grid">
+      <div class="menu-item"><div class="item-row"><div class="item-name">Arroz Blanco</div><div class="item-price">$2.000</div></div></div>
+      <div class="menu-item"><div class="item-row"><div class="item-name">Arroz con Choclo Peruano</div><div class="item-price">$3.000</div></div></div>
+      <div class="menu-item"><div class="item-row"><div class="item-name">Papas Fritas Chica</div><div class="item-price">$3.000</div></div></div>
+      <div class="menu-item"><div class="item-row"><div class="item-name">Papas Fritas Grandes</div><div class="item-price">$6.000</div></div></div>
+      <div class="menu-item"><div class="item-row"><div class="item-name">Papas Salteadas</div><div class="item-price">$3.500</div></div></div>
+      <div class="menu-item"><div class="item-row"><div class="item-name">Cancha Paccho</div><div class="item-price">$2.700</div></div></div>
+      <div class="menu-item"><div class="item-row"><div class="item-name">Camote Cocido</div><div class="item-price">$2.700</div></div></div>
+      <div class="menu-item"><div class="item-row"><div class="item-name">Choclo Peruano</div><div class="item-price">$3.200</div></div></div>
+      <div class="menu-item"><div class="item-row"><div class="item-name">Panaché de Verduras</div><div class="item-price">$3.500</div></div></div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════ POSTRES ════════════════════════════════ -->
+  <section id="postres" class="menu-section">
+    <div class="section-header">
+      <h2>🍮 <em>Postres</em></h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="items-grid">
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Suspiro Limeño</div><div class="item-price">$5.600</div></div>
+        <div class="item-desc">Crema dulce de manjar blanco con merengue de pisco. Postre emblema de Lima.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Crema Volteada</div><div class="item-price">$4.200</div></div>
+        <div class="item-desc">El flan peruano — suave y caramelizado.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Copa Helado 3 Sabores</div><div class="item-price">$4.800</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Copa Helado Simple</div><div class="item-price">$2.500</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════ BEBIDAS ════════════════════════════════ -->
+  <section id="bebidas" class="menu-section">
+    <div class="section-header">
+      <h2>🥤 <em>Bebidas</em></h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="items-grid">
+      <div class="menu-item"><div class="item-row"><div class="item-name">Inka Kola 1.500 cc</div><div class="item-price">$4.000</div></div></div>
+      <div class="menu-item"><div class="item-row"><div class="item-name">Inka Kola 500 cc</div><div class="item-price">$2.500</div></div></div>
+      <div class="menu-item"><div class="item-row"><div class="item-name">Coca Cola 1¼ litro</div><div class="item-price">$3.000</div></div></div>
+      <div class="menu-item"><div class="item-row"><div class="item-name">Pepsi 1.000 cc</div><div class="item-price">$2.000</div></div></div>
+      <div class="menu-item"><div class="item-row"><div class="item-name">Coca Cola / Fanta / Sprite / Mineral / Néctar 350 cc</div><div class="item-price">$2.000</div></div></div>
+      <div class="menu-item"><div class="item-row"><div class="item-name">Coca Cola / Fanta / Sprite 237 cc</div><div class="item-price">$1.300</div></div></div>
+    </div>
+
+    <div class="section-header" style="padding-top:24px;">
+      <h2>🌿 Jugos e <em>Infusiones</em></h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="items-grid">
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Jugos Naturales</div><div class="item-price">$3.000</div></div>
+        <div class="item-desc">Chirimoya · Mango · Maracuyá · Papaya · Frutilla · Menta Limón · Piña · Limonada — según disponibilidad.</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-row"><div class="item-name">Nescafé / Té / Té de Hierbas</div><div class="item-price">$1.000</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <img src="./images/LogoChavin.png" alt="El Chavín" onerror="this.style.display='none'"/>
+    <a href="https://wa.me/56961956012" target="_blank" class="wa-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Pedir o Reservar por WhatsApp
+    </a>
+    <p>Av. San José de la Estrella #850, La Florida · Lunes a Domingo 11:00–20:00 hrs</p>
+    <p style="margin-top:8px;">© 2025 El Chavín · Diseño web ARM</p>
+  </footer>
+
+  <!-- WA FLOAT -->
+  <a href="https://wa.me/56961956012" target="_blank" class="wa-float" title="WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <script>
+    function switchTab(btn, sectionId) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.menu-section').forEach(s => s.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(sectionId).classList.add('active');
+      // Scroll suave al top del contenido
+      document.querySelector('.aviso').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  </script>
+</body>
+</html>
