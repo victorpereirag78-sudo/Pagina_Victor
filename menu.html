@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="Menú completo del Restaurante El Chavín — Gastronomía peruana auténtica en La Florida, Santiago."/>
   <title>Menú · El Chavín · Restaurant Peruano</title>
+  <link rel="canonical" href="https://restauranteelchavin.cl/menu.html"/>
+  <link rel="icon" type="image/png" href="./images/LogoChavin.png"/>
+  <meta property="og:type" content="restaurant"/>
+  <meta property="og:title" content="Menú · El Chavín · Restaurante Peruano"/>
+  <meta property="og:description" content="Menú completo del Restaurante El Chavín — Gastronomía peruana auténtica en La Florida, Santiago."/>
+  <meta property="og:image" content="https://restauranteelchavin.cl/images/LogoChavin.png"/>
+  <meta property="og:url" content="https://restauranteelchavin.cl/menu.html"/>
+  <meta name="twitter:card" content="summary_large_image"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
@@ -32,36 +40,42 @@
     header {
       background: var(--humo);
       border-bottom: 2px solid var(--rojo);
-      padding: 24px 5% 20px;
+      padding: 10px 5%;
       text-align: center;
       position: sticky;
       top: 0;
       z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
     }
     .header-logo {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
-      margin-bottom: 6px;
+      flex-shrink: 0;
     }
     .header-logo img {
-      height: 200px;
+      height: 44px;
+      width: auto;
       filter: drop-shadow(0 0 6px rgba(212,160,23,0.4));
     }
+    .header-text { text-align: left; }
     header h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(1.4rem, 5vw, 1.9rem);
+      font-size: clamp(1.1rem, 4vw, 1.5rem);
       font-weight: 900;
       letter-spacing: 0.02em;
+      line-height: 1.1;
     }
     header h1 em { font-style: italic; color: var(--oro); }
     header p {
-      font-size: 0.75rem;
-      letter-spacing: 0.18em;
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--gris);
-      margin-top: 4px;
+      margin-top: 2px;
     }
 
     /* ── NAV TABS ── */
@@ -266,8 +280,10 @@
     <div class="header-logo">
       <img src="./images/LogoChavin.png" alt="El Chavín" onerror="this.style.display='none'"/>
     </div>
-    <h1><em>El Chavín</em></h1>
-    <p>Carta · Gastronomía Peruana Auténtica</p>
+    <div class="header-text">
+      <h1><em>El Chavín</em></h1>
+      <p>Carta · Gastronomía Peruana Auténtica</p>
+    </div>
   </header>
 
   <!-- TABS NAV -->
@@ -409,7 +425,7 @@
       </div>
       <div class="menu-item">
         <div class="item-row"><div class="item-name">Trío de Ceviche (3 pax)</div><div class="item-price">$23.500</div></div>
-        <div class="item-desc">Deliciosos trozos de Salmon, reineta, camarones, alamares, ostiones marinados en jugo de limon, cebolla morada, choclo, canchita yuca frita, camote y platano frito.</div>
+        <div class="item-desc">Deliciosos trozos de Salmón, reineta, camarones, calamares, ostiones marinados en jugo de limón, cebolla morada, choclo, canchita, yuca frita, camote y plátano frito.</div>
       </div>
       <div class="menu-item">
         <div class="item-row"><div class="item-name">Pescado en Salsa Andina</div><div class="item-price">$11.500</div></div>
@@ -756,7 +772,7 @@
       Pedir o Reservar por WhatsApp
     </a>
     <p>Av. San José de la Estrella #850, La Florida · Lunes a Domingo 11:00–20:00 hrs</p>
-    <p style="margin-top:8px;">© 2025 El Chavín · Diseño web ARM</p>
+    <p style="margin-top:8px;">© 2026 El Chavín · Diseño web ARM</p>
   </footer>
 
   <!-- WA FLOAT -->
