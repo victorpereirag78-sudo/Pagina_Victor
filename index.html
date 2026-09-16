@@ -655,6 +655,18 @@
       letter-spacing: 0.05em;
     }
     footer img { height: 36px; filter: brightness(0.6); }
+    .footer-credit {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--oro);
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      opacity: 0.9;
+      transition: opacity 0.2s, color 0.2s;
+    }
+    .footer-credit:hover { opacity: 1; color: #fff; text-decoration: underline; }
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 900px) {
@@ -1358,7 +1370,9 @@
   <footer>
     <img src="./images/LogoChavin.png" alt="El Chavín" />
     <p>© 2026 El Chavín · Restaurante Peruano · La Florida, Santiago · Todos los derechos reservados</p>
-    <p style="color:rgba(245,237,214,0.2); font-size:0.7rem;">Diseño web por ARM</p>
+    <a href="https://www.armsistemas.cl/" target="_blank" rel="noopener" class="footer-credit">
+      ⚡ Página web diseñada por ARM Sistemas
+    </a>
   </footer>
 
   <!-- WHATSAPP FLOTANTE -->
